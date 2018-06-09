@@ -47,8 +47,29 @@ class User {
                           //class by using global
         
         $query = $database->query($sql);
-        $query_results = mysqli_fetch_array($query);
-        return $query_results;
+        $the_object_array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            $the_object_array[] = self::instantation($row);
+        }
+        return $the_object_array;
+    }
+    
+    public static function instantation($array_results) {
+        $the_object = new self; // self refers to the current class so writing self instead of User()
+        
+        foreach ($array_results as $class_property => $value) {
+            if ($the_object->has_class_property($class_property)) {
+                $the_object->$class_property = $value;
+            }
+        }
+        return $the_object;
+    }
+    
+    private function has_class_property($class_property) {
+        $object_properties = get_object_vars($this); // passes an array of the User class properties into the variable created. 
+                                                     //$this in the brackets refers to the current class we are in
+        
+        return array_key_exists($class_property, $object_properties);
     }
     
     

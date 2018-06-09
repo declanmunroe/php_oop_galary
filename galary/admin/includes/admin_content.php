@@ -9,8 +9,11 @@
             </h1>
             
             <?php
-            $result = User::find_user_by_id(1);
-            echo $result['username'];
+            $users = User::find_user_by_id(2);
+            
+            foreach ($users as $user) {
+                echo $user->password."<br>";
+            }
             ?>
             <ol class="breadcrumb">
                 <li>
