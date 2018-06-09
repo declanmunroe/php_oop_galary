@@ -9,10 +9,8 @@
             </h1>
             
             <?php
-            $sql = "SELECT * FROM users WHERE id = 1";
-            $result = $database->query($sql);
-            $users_found = mysqli_fetch_array($result);
-            echo print_r($users_found);
+            $result = User::find_user_by_id(1);
+            echo $result['username'];
             ?>
             <ol class="breadcrumb">
                 <li>
