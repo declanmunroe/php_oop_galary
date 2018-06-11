@@ -11,9 +11,7 @@
             <?php
             $users = User::find_user_by_id(2);
             
-            foreach ($users as $user) {
-                echo $user->password."<br>";
-            }
+            echo $users->first_name;
             ?>
             <ol class="breadcrumb">
                 <li>

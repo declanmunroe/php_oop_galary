@@ -36,8 +36,9 @@ class User {
     
     public static function find_user_by_id($id) {
         
+        $the_result_array =  self::find_this_query("select * from users where id = $id");
         
-        return self::find_this_query("select * from users where id = $id");
+        return !empty($the_result_array) ? array_shift($the_result_array) : false; // returns the first item of the array
         
     }
     
@@ -56,6 +57,8 @@ class User {
     
     public static function instantation($array_results) {
         $the_object = new self; // self refers to the current class so writing self instead of User()
+        
+        // $the_object->username = $array['username'] This method is turning the array values into object properties
         
         foreach ($array_results as $class_property => $value) {
             if ($the_object->has_class_property($class_property)) {
