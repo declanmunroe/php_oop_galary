@@ -1,16 +1,15 @@
 <?php
 
-function __autoload($class) {
+function classAutoLoader($class) {
     $class_name = strtolower($class);
     
     $the_path = "includes/{$class_name}.php";
     
-    if (file_exists($the_path)) {
-        require_once($the_path);
-    }
-    else {
-        die("The file names {$class_name}.php was not found");
+    if (is_file($the_path) && !class_exists($class_name)) {
+        include $the_path;
     }
 }
+
+spl_autoload_register('classAutoLoader');
 ?>
 
